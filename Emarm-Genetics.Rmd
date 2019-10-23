@@ -1,0 +1,144 @@
+---
+title: <center><h1>Genetic diversity of a highly imperiled, habitat specialist, *Etheostoma marmorpinnum*, from Little River, TN</h1></center>
+author: |
+  <center>Jacob F. Brumley and Rebecca E. Blanton</center>
+  <center><font size = "2">Johansen Lab of Ichthyology at Austin Peay State University, Department of Biology and Center of Excellence for Field Biology</font></center>
+output: 
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+![Figure 1. *Etheostoma marmorpinnum* from Little River at River John's](Emarm.jpg)
+
+<h1><span style = "color:blue">Abstract</span></h1>
+
+The federally endangered Marbled Darter, *Etheostoma marmorpinnum*, is endemic to the Little River in eastern Tennessee. Anthropogenic land use in the upper Tennessee Valley has contributed to degradation and fragmentation of *E. marmorpinnum* habitat. These changes have resulted in a decrease in population abundance and occurrence of the species, reducing its range from one that historically included the South Fork Holston River to a 20 rkm stretch of the lower Little River. *E. marmorpinnum* is patchily distributed across this reach of the Little River, utilizing a specific habitat of low-flowing pools with clean gravel and cobble substrate, bracketed by Fort Loudon Dam downstream and Perry’s Mill Dam upstream. Our objectives were to estimate genetic diversity at site and species levels to provide a baseline for conservation actions and for future genetic monitoring. Fifty-six individuals were captured and clipped while snorkeling at 3 known localities that spanned the range of the species. Twenty variable microsatellite loci were used to collect genotypic data for all individuals, and a standard suit of population genetic analyses were performed. 
+
+<h1><span style = "color:blue">Introduction (Short Version)</span></h1>
+
+Habitat loss and fragmentation cause declines in population connectivity and abundance, increasing genetic drift and influencing genetic diversity. Decreases in abundance and genetic diversity within a population lead to inbreeding and genetic homogenization of the population, reducing the fitness of both the individuals and the population as a whole. Imperiled species that are already in threat of extirpation or extinction may not survive a reduction in fitness. The federally endangered Marbled Darter, *Etheostoma marmorpinnum* (Blanton & Jenkins, 2008), is found in the Little River of Tennessee. It's restricted range and patchy habitat, small population size, and limited larval dispersal have made the species highly suseptible to major changes in their available habitat. Although once known in the South Fork Houlston River, the darter is only found in a 20 rkm stretch of the lower Little River and is restricted in all directions by dams (Fort Loudoun Dam, TN R.; Cherokee Dam, Houlston R.; Douglas Dam, French Broad R.; Perry's Mill Dam, Little R.). Although protected under the ESA of 1973, the threat on the Marbled Darter is needed to be monitored. Genetic monitoring can be used by USFWS to determined future directions for the conservation of this species.
+
+<h1><span style = "color:blue">Objectives</span></h1>
+
+1. Estimate genetic diversity at site and species levels
+
+2. Provide genetic baseline for future conservation and genetic monitoring
+
+<h1><span style = "color:blue">Methods</span></h1>
+
+<span style = "color:violet">Study Area:</span> *Etheostoma marmorpinnum*'s range is restricted to a 20 rkm stretch of the lower Little River in eastern Tennessee. This stretch is bracketed by Fort Loudoun Dam downstream on the Tennessee River and Perry's Mill Dam upstream on the Little River. Three sites were selected, being the only known thriving populations (TN-33 Bridge Crossing, River John's, and Coulter's Bridge).
+
+<span style = "color:violet">Methods:</span> Tissue samples were taken from the upper lobe of the caudal fin of 56 individuals. DNA was extracted from all tissue samples, using a Qiagen DNeasy Blood and Tissue Kit. The extracted DNA was amplified through PCR for 20 previously published microsatellite primers for *Etheostoma lemniscatum*. R was used to run a standard suit of population genetic analyses for genotypic data.
+
+<h1><span style = "color:blue">Results</span></h1>
+
+Genotypic data was analyzed using various packages in R. Each package used measured given populaiton genetic metrics that determine genetic diversity. The following packages were used in this study:
+
+```{r Setup, include=FALSE}
+#Clear R's Brain
+rm(list = ls())
+
+#Install Packages if needed
+knitr::opts_chunk$set(echo = TRUE)
+packages_needed <- c("dplyr", 
+                     "adegenet",
+                     "ade4",
+                     "pegas",
+                     "ape",
+                     "hierfstat",
+                     "PopGenReport",
+                     "genepop")
+
+pk_to_install <- packages_needed [!( packages_needed %in% rownames(installed.packages())  )]
+if(length(pk_to_install)>0 ){
+  install.packages(pk_to_install,repos="http://cran.r-project.org")}
+
+library(dplyr)
+library(adegenet)
+library(ade4)
+library(pegas)
+library(ape)
+library(hierfstat)
+library(PopGenReport)
+library(genepop)
+```
+
+<span style = "color:green">PopGenReport</span> gives a complete report of population genetic metrics. From this report, we can look specifically at **Allelic Richness, Private Alleles, Null Alleles, Mean Alleles per Locus, Deviations from Hardy-Weinberg Equillibrium, Genetic Fixation (F~ST~), and Heterozygosity.**
+
+```{r PopGenReport}
+#Use the function popgenreport()
+#This function runs a complete report of pop gen metrics
+
+```
+
+
+<span style = "color:green">hierfstat</span> looks specifically at F-statistics and fixation. From this package, we can look calculate **Genetic Fixation (F~ST~), Pairwise F~ST~ Values, and Inbreeding Coefficients (F~IS~).**
+
+```{r hierfstat}
+#Use the function fstat()
+#This function produces a table in R that presents Fst, Fit, and Fis
+#Fst is the F statistic comparing pop to Total
+#Fit is the F statistic comparing Ind to Total
+#Fis is the F statistic comparing Ind to pop
+
+#Use the function pairwise.fst()
+#This function produces a table showing the pairwise Fst interactions.
+
+```
+
+
+<span style = "color:green">genepop</span> will be used to calculate **Isolation by Distance (IBD) and Linkage Disequilibrium (LD).**
+
+```{r genepop}
+#Testing for LD
+#Use the functions test_LD() and write_LD_tables()
+
+#Testing for IBD
+#Use the function ibd()
+
+```
+
+<h1><span style = "color:blue">Literature Cited</span></h1>
+
+<span style = "color:violet">R Packages:</span>
+
+Adamack, A.T. and B. Gruber. 2014. PopGenReport: simplifying basic population genetic analyses in R. Methods in Ecology and Evolution 5(4):384-387.
+
+Dray, S. and A. Dufour. 2007. The ade4 Package: Implementing the Duality Diagram for Ecologists. Journal of Statistical Software 22(4):1-20.
+
+Goudet, J. and T. Jombart. 2015. hierfstat: Estimation and Tests of Hierarchical F-Statistics. R package version 0.04-22.
+
+Jombart, T. 2008. adegenet: a R package for the multivariate analysis of genetic markers. Bioinformatics 24:1403-1405. 
+
+Paradis, E. 2010. pegas: an R package for population genetics with an integrated-modular approach. Bioinformatics 26:419-420.
+
+Paradis, E. and K. Schliep. 2018. ape 5.0: an environment for modern phylogenetics and evolutionary analyses in R. Bioinformatics 35:526-528.
+
+Rousset F. 2008. genepop: a complete re-implementation of the genepop software for Windows and Linux. Molecular Ecology Resources 8:103-106.
+  
+<span style = "color:violet"> Genetics and Species:</span>
+
+Antao, T., A. Perez-Figueroa, and G. Luikart. 2011. Early detection of population declines: high power of genetic monitoring using effective population size estimators. Evolutionary Applications 4:144-154.
+
+Biggins, R. E. 1993. Endangered and threatened wildlife and plants: determination of endangered status for the duskytail darter, palezone shiner and pygmy madtom. Federal Register 58: 25758-25763.
+
+Blanton, R. E. and R. E. Jenkins. 2008. Three new darter species of the Etheostoma percnurum species complex (Percidae, subgenus Catonotus) from the Tennessee and Cumberland River drainages. Zootaxa 1963:1-24.
+
+Farhig, L. 1997. Relative effects of habitat loss and fragmentation on population extinction. The Journal of Wildlife Management 61:603-610.
+
+Frankham, R. 1996. Relationship of genetic variation to population size in wildlife. Conservation Biology 10:1500-1508.
+
+Hansen, M. M., I. Olivieri, D. M. Waller, E. E. Nielsen, and the GeM Working Group. 2012. Monitoring adaptive genetic responses to environmental change. Molecular Ecology 21:1311-1329.
+
+Layman, S. R. 1991. Life history of the relict, Duskytail Darter, Etheostoma (Catonotus) sp., in Little River, Tennessee. Copeia 1991:471-485.
+
+Luikart, G., W. B. Sherwin, B. M. Steele, and W. F. Allendorf. 1998. Usefulness of molecular markers for detecting population bottlenecks via monitoring genetic change. Molecular Ecology 7: 963-974.
+
+Reed, D. H. and R. Frankham. 2003. Correlation between fitness and genetic diversity. Conservation Biology 17:230-237.
+
+Schwartz, M. K., G. Luikart, and R. S. Waples. 2006. Genetic monitoring as a promising tool for conservation and management. TRENDS in Ecology and Evolution 22:25-33.
+
+Thrush, S. F., J. Halliday, J. E. Hewitt, and A. H. Lohrer. 2008. The effects of habitat loss, fragmentation, and community homogenization on resilience in estuaries. Ecological Applications 18:12-21. 
