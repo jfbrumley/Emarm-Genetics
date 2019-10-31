@@ -42,3 +42,4 @@ rsconnect/
 *.R
 inputs/
 outputs/
+*.Rmd
